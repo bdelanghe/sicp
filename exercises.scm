@@ -1,4 +1,8 @@
-#|Exersise 1.7|#
+#|Exercise 1.7|#
+
+; why the old good-enough isn't great
+;  n is small : sqrt-iter exits too soon
+;  n is big   : sqrt-iter never quits due to floating point percision
 
 (define (sqrt-iter guess x last-guess)
     (if (good-enough? guess x last-guess)
@@ -9,11 +13,11 @@
 (define (good-enough? guess x last-guess)
     (display guess)
     (display "\n")
-    (< (/ (abs (- guess last-guess)) x) 0.01))
+    (< (/ (abs (- guess last-guess)) x) 0.0000001))
 
 (define (sqrt x)
     (cond ((= x 0) 0)
-          ((> x 0) (sqrt-iter 1.0 x 0.0))
+          ((> x 0) (sqrt-iter 1.0 x x))
           (else "ERROR(sqrt): 'x' must be positive")))
 
 (define (improve guess x)
@@ -25,10 +29,10 @@
 (define (square x)
     (* x x))
 
-(sqrt 0.00005)
+(sqrt 100)
 
 #| *BOOKMARK* ;ignore what is below
-#|Exersise 1.6|#
+#|Exercise 1.6|#
 
 (define (new-if predicate then-clause else-clause)
     (cond (predicate then-clause)
@@ -73,7 +77,7 @@
 
 (sqrt -1)
 
-#|Exersise 1.5|#
+#|Exercise 1.5|#
 
 (define (p) (p)) ; p is a func that calls itself
 
@@ -94,13 +98,13 @@
 
 (test2 0 p) ; this will also be ok
 
-#|Exersise 1.4|#
+#|Exercise 1.4|#
 
 (define (a-plus-abs-b a b)
     ; change the operation to minus if b is negative
     ((if (> b 0) + -) a b))
 
-#|Exersise 1.3|#
+#|Exercise 1.3|#
 
 (define (sum-of-two-largest-sqr x y z) 
     (apply + (apply sqr_two (two_largest x y z))))
@@ -115,12 +119,12 @@
 
 (sum-of-two-largest-sqr 1 2 3)
 
-#|Exersise 1.2|#
+#|Exercise 1.2|#
 
 (/  (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5)))))
     (* 3 (- 6 2) (- 2 7)))
 
-#|Exersise 1.1|#
+#|Exercise 1.1|#
 
 10 ;10
 
