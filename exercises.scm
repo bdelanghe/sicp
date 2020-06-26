@@ -1,3 +1,4 @@
+
 #|Exersise 1.6|#
 
 (define (new-if predicate then-clause else-clause)
