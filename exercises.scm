@@ -1,4 +1,33 @@
+#|Exersise 1.7|#
 
+(define (sqrt-iter guess x last-guess)
+    (if (good-enough? guess x last-guess)
+            guess
+            (sqrt-iter (improve guess x)
+            x guess)))
+
+(define (good-enough? guess x last-guess)
+    (display guess)
+    (display "\n")
+    (< (/ (abs (- guess last-guess)) x) 0.01))
+
+(define (sqrt x)
+    (cond ((= x 0) 0)
+          ((> x 0) (sqrt-iter 1.0 x 0.0))
+          (else "ERROR(sqrt): 'x' must be positive")))
+
+(define (improve guess x)
+    (average guess (/ x guess)))
+
+(define (average x y)
+    (/ (+ x y) 2))
+
+(define (square x)
+    (* x x))
+
+(sqrt 0.00005)
+
+#| *BOOKMARK* ;ignore what is below
 #|Exersise 1.6|#
 
 (define (new-if predicate then-clause else-clause)
@@ -9,17 +38,40 @@
 
 (new-if (= 1 1) 0 5) ;0
 
-(define (sqr-iter guess x)
+; maybe try to build a trampoline?
+(define (sqrt-iter guess x)
     (new-if (good-enough? guess x)
             guess
-            (sqr-iter (improve guess x)
-                      x)))
+            "this would have looped forever"))
+            ;(sqrt-iter (improve guess x) x)))
 
-(define (improve guess x))
 
-(sqr-iter 3 2)
+(define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+            guess
+            (sqrt-iter (improve guess x)
+            x)))
 
-#| *BOOKMARK* ;ignore what is below
+(define (sqrt x)
+    (if (>= x 0)
+    (sqrt-iter 1.0 x)
+    "ERROR(sqrt): 'x' must be positive"))
+
+(define (improve guess x)
+    (average guess (/ x guess)))
+
+(define (average x y)
+    (/ (+ x y) 2))
+
+(define (good-enough? guess x)
+   ; (display guess)
+   ; (display "\n")
+    (< (abs (- (square guess) x)) 0.001))
+
+(define (square x)
+    (* x x))
+
+(sqrt -1)
 
 #|Exersise 1.5|#
 
